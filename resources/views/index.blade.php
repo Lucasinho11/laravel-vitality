@@ -2,7 +2,38 @@
 @extends('layouts.default')
 @section('content')
 @include('partials.navbar')
+<script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  const uluru = { lat: 48.8652497, lng: 2.3519977 };
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+  });
+}
 
+</script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXSU-l1B09CWYVyijmTa_0faFYCiXOGh4&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+<style>
+#map {
+    margin-left: 10%;
+    margin-right: 10%;
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 80%;
+  /* The width is the width of the web page */
+}
+</style>
 <div class="img-index">
     <div class="text-index">
         <h2>Réservez maintenant!</h2>
@@ -11,4 +42,6 @@
         </a>
         
     </div>
+</div>
+<div id="map">
 </div>
