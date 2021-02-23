@@ -21,7 +21,7 @@ function initMap() {
 
 </script>
 <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXSU-l1B09CWYVyijmTa_0faFYCiXOGh4&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=KEY&callback=initMap&libraries=&v=weekly"
       async
     ></script>
 <style>
