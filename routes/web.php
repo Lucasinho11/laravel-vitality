@@ -17,3 +17,4 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/reservation','App\Http\Controllers\ReservationController@show');
+Route::post('/reservation','App\Http\Controllers\ReservationController@store');
