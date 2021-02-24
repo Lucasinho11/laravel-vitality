@@ -29,16 +29,17 @@ class ReservationController extends Controller
                     if($today < $_POST['date'] ){
                         if($nameDay != 'Sunday'){
                             if(12 < $_POST['time'] && $_POST['time'] < 18){
+                                $result = Reservation::verif($_POST['time'], $_POST['date']);
                                 
-                                $result = DB::select('select * from reservations where  date = :date AND hour = :hour', ['date' => $_POST['date'], 'hour' => $_POST['time']]);
                                 if(count($result) < 10){
                                     Reservation::insert();
                                 }
                                 else{
 
                                     //Pas de places dispos
+
                                 }
-                                var_dump(count($result));
+
                                 return view('reservation');
 
                             }
