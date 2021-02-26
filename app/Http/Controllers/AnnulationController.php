@@ -5,6 +5,8 @@ use App\Models\Annulation;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AnnulationMail;
 
 class AnnulationController extends Controller
 {
@@ -28,7 +30,7 @@ class AnnulationController extends Controller
         var_dump($token);
         Annulation::supReservation($token);
         session()->flash('message', 'success');
-
+        Mail::to($_POST['email'])->send(new AnnulationMail());
         return view('annulation', compact('token'), ['token'=>$token]);
     }
 }
