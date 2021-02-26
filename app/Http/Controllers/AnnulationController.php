@@ -21,16 +21,16 @@ class AnnulationController extends Controller
     // $token = compact('token');
      $_SESSION['annulation'] = Annulation::getInfo($token);
     // return view('annulation', $result);
-    var_dump($_SESSION['annulation']);
     DB::table('reservations')->where('token', '=', $token);
     return view('annulation', compact('token'), ['token'=>$token]);
 }
     public function deleteReservation($token){
+        Mail::to($_POST['email'])->send(new AnnulationMail());
         DB::table('reservations')->where('token', '=', $token);
         var_dump($token);
         Annulation::supReservation($token);
         session()->flash('message', 'success');
-        Mail::to($_POST['email'])->send(new AnnulationMail());
+
         return view('annulation', compact('token'), ['token'=>$token]);
     }
 }
