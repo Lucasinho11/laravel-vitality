@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 Route::get('/reservation','App\Http\Controllers\ReservationController@show');
 Route::post('/reservation','App\Http\Controllers\ReservationController@store');
+Route::get('/reservation/annulation/{token}','App\Http\Controllers\AnnulationController@show' );
+Route::post('/reservation/annulation/{token}','App\Http\Controllers\AnnulationController@deleteReservation');

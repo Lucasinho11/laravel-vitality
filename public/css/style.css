@@ -21,3 +21,15 @@
 .logo-nav{
     width: 2000px;
 }
+.error{
+    color: red;
+    text-align: center;
+}
+.div-array{
+    display:flex;
+    justify-content: center;
+    text-align:center;
+}
+.infos{
+    text-align:center;
+}

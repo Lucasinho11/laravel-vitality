@@ -9,13 +9,12 @@
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
        Vitality V-Hive
       </h2>
-      <p class="text-center">Réserver une place pour une heure</p>
+      <p class="text-center">Voulez-vous annuler votre réservation ?</p>
+
+        
+      
     </div>
-    <div class="div error">
-    <?php if(isset($_SESSION['message'])):?>
-      <p class="error"><?= $_SESSION['message']?></p>
-    <?php endif;?>
-    </div>
+
     
     @if (session()->has('message'))
       <div class="fixed z-10 inset-0 overflow-y-auto">
@@ -30,11 +29,11 @@
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                    Réservation enregistrée ✅
+                    Réservation annulée ✅
                   </h3>
                   <div class="mt-2">
                     <p class="text-sm text-gray-500">
-                      Un email de confirmation vous sera envoyé
+                      Un email vous sera envoyé
                     </p>
                   </div>
                 </div>
@@ -50,22 +49,13 @@
         </div>
       </div>
     @endif
-    <form class="mt-8 space-y-6" action="/reservation" method="POST">
+    <form class="mt-8 space-y-6" action="/reservation/annulation/{token}" method="POST">
       @csrf
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
-          <label for="email-address" class="sr-only">Email</label>
-          <input id="email-address" name="email" type="email" value="<?php if(isset($_SESSION['old_inputs'])):?><?=$_SESSION['old_inputs']['email'] ?><?php endif;?>" autocomplete="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Exemple: Gotaga.contact@orange.fr">
-
-        </div>
-        <div>
-          <label for="date" class="sr-only">Date</label>
-          <input id="date" name="date" type="date" value="<?php if(isset($_SESSION['old_inputs'])):?><?=$_SESSION['old_inputs']['date'] ?><?php endif;?>" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
-        </div>
-        <div>
-          <label for="time" class="sr-only">Heure</label>
-          <input id="time" name="time" type="time" value="<?php if(isset($_SESSION['old_inputs'])):?><?=$_SESSION['old_inputs']['time'] ?><?php endif;?>" step="3600" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+            <input type="checkbox" id="annulation" name="annulation" required>
+            <label for="scales">Je souhaite annuler ma réservation</label>
         </div>
       </div>
 
@@ -74,7 +64,7 @@
         <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
           </span>
-          Réserver
+          Annuler ma réservation
         </button>
       </div>
     </form>
