@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sendMail;
-//use config\Information;
+use Config\Information;
 
 class ReservationController extends Controller
 {
@@ -31,8 +31,8 @@ class ReservationController extends Controller
             else{
                 
                 $today = date('Y-m-d');
-                $tabDate = explode('-', $_POST['date']);
-                $timestamp = mktime(0, 0, 0, $tabDate[1], $tabDate[2], $tabDate[0]);
+                $tab = explode('-', $_POST['date']);
+                $timestamp = mktime(0, 0, 0, $tab[1], $tab[2], $tab[0]);
                 $nameDay = date('l', $timestamp);
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     if($today < $_POST['date'] ){

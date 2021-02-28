@@ -1,5 +1,5 @@
 <?php
-namespace config;
+namespace Config;
 class Information
 {
     public $dayOff;
