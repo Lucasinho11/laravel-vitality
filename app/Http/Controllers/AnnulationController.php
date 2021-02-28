@@ -10,27 +10,19 @@ use App\Mail\AnnulationMail;
 
 class AnnulationController extends Controller
 {
-    // public function show(){
-    //     //$result = Annulation::getInfo('token');
-        
-    //     return view('annulation',compact('annulation'));
-    //     //return view('annulation');
-    // }
+
     public function show($token)
 {   
-    // $token = compact('token');
-     $_SESSION['annulation'] = Annulation::getInfo($token);
-    // return view('annulation', $result);
-    DB::table('reservations')->where('token', '=', $token);
+
+   Annulation::supReservation($token);
     return view('annulation', compact('token'), ['token'=>$token]);
 }
-    public function deleteReservation($token){
-        Mail::to($_POST['email'])->send(new AnnulationMail());
-        DB::table('reservations')->where('token', '=', $token);
-        var_dump($token);
-        Annulation::supReservation($token);
+    public function deleteReservation(){
+        //$_SESSION['annulation'] = Annulation::getInfo($token);
+        //Mail::to($_SESSION['annulation']['email'])->send(new AnnulationMail());
+        //Annulation::supReservation($token);
         session()->flash('message', 'success');
 
-        return view('annulation', compact('token'), ['token'=>$token]);
+        return view('annulation');
     }
 }

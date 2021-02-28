@@ -13,8 +13,8 @@ class Annulation extends Model
         return $results;
     }
     public static function supReservation($token){
-        
-        $results = DB::delete('delete from reservations where  token = :token', ['token' => $token]);
-        return $results;
+        $result =  DB::table('reservations')->where('token', '=', $token)->delete();
+        //$results = DB::delete('delete from reservations where  token = :token', ['token' => $token]);
+        return $result;
     }
 }
