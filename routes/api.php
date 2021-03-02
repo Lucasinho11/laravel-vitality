@@ -16,14 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('infos', function(){
-    return "ok";
-});
 
+Route::get('/infos','App\Http\Controllers\InfoController@show');
 Route::post('/reservation','App\Http\Controllers\ApiReservationController@create');
-// Route::post('reservation', function(){
-//     return ;
+// Route::get('/infos', function(){
+//     return "ok";
 // });
-Route::get('reservation/annulation/{token}', function(){
-    return "annuler";
-});
+Route::get('annulation/{token}','App\Http\Controllers\ApiAnnulationController@show');
+// Route::get('annulation/{token}', function(){
+//     return "annuler";
+// });

@@ -73,22 +73,22 @@ function initMap() {
           <tbody class="bg-white divide-y divide-gray-200">
             <tr>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">12h-18h</div>
+                <div class="text-sm text-gray-900">{{$openHour}}h-{{$closeHour}}h</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">12h-18h</div>
+                <div class="text-sm text-gray-900">{{$openHour}}h-{{$closeHour}}h</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">12h-18h</div>
+                <div class="text-sm text-gray-900">{{$openHour}}h-{{$closeHour}}h</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">12h-18h</div>
+                <div class="text-sm text-gray-900">{{$openHour}}h-{{$closeHour}}h</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">12h-18h</div>
+                <div class="text-sm text-gray-900">{{$openHour}}h-{{$closeHour}}h</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">12h-18h</div>
+                <div class="text-sm text-gray-900">{{$openHour}}h-{{$closeHour}}h</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">Fermé ❌</div>
@@ -104,9 +104,9 @@ function initMap() {
 </div>
 
 <div class="infos">
-<h2>📍Adresse: 102 Boulevard de Sébastopol, 75003 Paris</h2>
+<h2>📍Adresse: {{$adress}}</h2>
 </div>
 <div id="map">
 
 </div>
-<?= env('APP_NAME');?>
+

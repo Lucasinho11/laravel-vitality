@@ -1,20 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-session_start();
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
+use Illuminate\Http\Request;
 
-class IndexController extends Controller
+use Illuminate\Support\Facades\Response;
+class InfoController extends Controller
 {
-    public function index()
-    {
+    public function show(){
+
         $adress = Config::get('information.adress');
         $dayOff = Config::get('information.dayOff');
         $openHour = Config::get('information.openHour');
         $closeHour = Config::get('information.closeHour');
         $placeLimit = Config::get('information.placeLimit');
-        return view('index', compact('adress','dayOff', 'openHour', 'closeHour', 'placeLimit'));
+        return response()->json(['infos' => ['adresse' => $adress,'Jour fermé' =>  $dayOff,"heure d'ouverture" => $openHour,"heure de fermeture" => $closeHour,"limite de place" => $placeLimit]], 422);
     }
+    
 }

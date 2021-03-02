@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
@@ -14,13 +14,19 @@ class ApiReservationController extends Controller
 
         //$informations = new Information("Sunday", 12,18,10);
         $_SESSION['message'] ='';
+
+        $dayOff = Config::get('information.dayOff');
+        $openHour = Config::get('information.openHour');
+        $closeHour = Config::get('information.closeHour');
+        $placeLimit = Config::get('information.placeLimit');
         if(!empty($_POST)){
             if(empty($_POST['email']) || empty($_POST['date']) || empty($_POST['time'])) {
                 
                 $_SESSION['old_inputs'] = $_POST;
                 
-                $response = Response::make($_POST, 422);
-                return $response()->json(['error' => 'Champs obligatoire'], 422);
+
+                return response()->json(['error' => 'Champs obligatoire'], 422);
+                
 
     
             }
@@ -32,20 +38,20 @@ class ApiReservationController extends Controller
                 $nameDay = date('l', $timestamp);
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     if($today < $_POST['date'] ){
-                        //$informations->dayOff
-                        if($nameDay != 'Sunday' ){
-                            if(12 <= $_POST['time'] && $_POST['time'] < 18){
+
+                        if($nameDay != $dayOff ){
+                            if($openHour <= $_POST['time'] && $_POST['time'] < $closeHour){
                                 $result = Reservation::verif($_POST['time'], $_POST['date']);
                                 
-                                if(count($result) < 10){
+                                if(count($result) < $placeLimit){
                                     $token = md5(uniqid(true));
                                     Reservation::insert($_POST, $token);
                                     Mail::to($_POST['email'])->send(new sendMail($token, $_POST));
                                     //return back()->with('success','Item created successfully!');
                   
 
-                                    $response = Response::make($_POST, 201);
-                                    return $response()->json(['message' => 'succes'], 201);
+
+                                    return response()->json(['message' => 'succes'], 201);
       
 
                                     
@@ -55,8 +61,8 @@ class ApiReservationController extends Controller
                                     //Pas de places dispos
 
                                     $_SESSION['old_inputs'] = $_POST;
-                                    $response = Response::make($_POST, 400);
-                                    return $response()->json(['error' => "Il n'y a plus de place disponible à cette heure ce jour ci"], 400);
+
+                                    return response()->json(['error' => "Il n'y a plus de place disponible à cette heure ce jour ci"], 400);
 
                                 }
 
@@ -66,16 +72,16 @@ class ApiReservationController extends Controller
                                 //L'établissement est fermé pendant cette horaire
                                 $_SESSION['old_inputs'] = $_POST;
 
-                                $response = Response::make($_POST, 400);
-                                return $response()->json(['error' => "L'établissement est fermé à cette heure"], 400);
+
+                                return response()->json(['error' => "L'établissement est fermé à cette heure"], 400);
                             }
                         }
                         else{
                             //dimanche fermé
                  
                             $_SESSION['old_inputs'] = $_POST;
-                            $response = Response::make($_POST, 400);
-                            return $response()->json(['error' => "L'établissement est fermé le jour que vous avez choisi."], 400);
+
+                            return response()->json(['error' => "L'établissement est fermé le jour que vous avez choisi."], 400);
                         }
                         
                         
@@ -84,16 +90,16 @@ class ApiReservationController extends Controller
                         //date déjà passée
 
                         $_SESSION['old_inputs'] = $_POST;
-                        $response = Response::make($_POST, 400);
-                        return $response()->json(['error' => "Cette date est déjà passée"], 400);
+
+                        return response()->json(['error' => "Cette date est déjà passée"], 400);
                     }
 
                 }   
                 else{
                     //email non valide
                     $_SESSION['old_inputs'] = $_POST;
-                    $response = Response::make($_POST, 422);
-                    return $response()->json(['error' => "Email non valide"], 422);
+
+                    return response()->json(['error' => "Email non valide"], 422);
                 }
                 
                 

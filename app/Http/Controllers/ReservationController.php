@@ -19,6 +19,11 @@ class ReservationController extends Controller
     
     public function store(Request $request){
 
+        $dayOff = Config::get('information.dayOff');
+        $openHour = Config::get('information.openHour');
+        $closeHour = Config::get('information.closeHour');
+        $placeLimit = Config::get('information.placeLimit');
+
         //$informations = new Information("Sunday", 12,18,10);
         $_SESSION['message'] ='';
         if(!empty($_POST)){
@@ -40,8 +45,8 @@ class ReservationController extends Controller
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     if($today < $_POST['date'] ){
                         //$informations->dayOff
-                        if($nameDay != 'Sunday' ){
-                            if(12 <= $_POST['time'] && $_POST['time'] < 18){
+                        if($nameDay != $dayOff ){
+                            if($openHour <= $_POST['time'] && $_POST['time'] < $closeHour){
                                 $result = Reservation::verif($_POST['time'], $_POST['date']);
                                 
                                 if(count($result) < 10){
@@ -61,7 +66,7 @@ class ReservationController extends Controller
                                     //Pas de places dispos
                                     $_SESSION['message'] = "Il n'y a plus de place disponible à cette heure ce jour ci";
                                     $_SESSION['old_inputs'] = $_POST;
-                                    return view('reservation');
+                                    return view('reservation',compact('dayOff', 'openHour', 'closeHour', 'placeLimit'));
                                 }
 
 
@@ -70,7 +75,7 @@ class ReservationController extends Controller
                                 //L'établissement est fermé pendant cette horaire
                                 $_SESSION['message'] = "L'établissement est fermé à cette heure";
                                 $_SESSION['old_inputs'] = $_POST;
-                                return view('reservation');
+                                return view('reservation', compact('dayOff', 'openHour', 'closeHour', 'placeLimit'));
                                 //return redirect('reservation')->withInput();
                             }
                         }
@@ -78,7 +83,7 @@ class ReservationController extends Controller
                             //dimanche fermé
                             $_SESSION['message'] = "L'établissement est fermé le jour que vous avez choisi.";
                             $_SESSION['old_inputs'] = $_POST;
-                            return view('reservation');
+                            return view('reservation', compact('dayOff', 'openHour', 'closeHour', 'placeLimit'));
                         }
                         
                         
@@ -87,7 +92,7 @@ class ReservationController extends Controller
                         //date déjà passée
                         $_SESSION['message'] = "Cette date est déjà passée";
                         $_SESSION['old_inputs'] = $_POST;
-                        return view('reservation');
+                        return view('reservation', compact('dayOff', 'openHour', 'closeHour', 'placeLimit'));
                     }
 
                 }   
@@ -95,7 +100,7 @@ class ReservationController extends Controller
                     //email non valide
                     $_SESSION['message'] = "Email non valide";
                     $_SESSION['old_inputs'] = $_POST;
-                    return view('reservation');
+                    return view('reservation', compact('dayOff', 'openHour', 'closeHour', 'placeLimit'));
                 }
                 
                 
