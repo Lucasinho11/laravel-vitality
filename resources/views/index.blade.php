@@ -5,7 +5,6 @@
 <script>
 
 function initMap() {
-
   const v_hive = { lat: 48.8652497, lng: 2.3519977 };
 
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -20,11 +19,7 @@ function initMap() {
 }
 
 </script>
-<script
-
-      src="https://maps.googleapis.com/maps/api/js?key=<?=config('.env.API_KEY')?>&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?=getenv('API_KEY')?>&callback=initMap&libraries=&v=weekly" async></script>
 <style>
 #map {
     margin-left: 10%;
@@ -70,6 +65,7 @@ function initMap() {
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Dimanche
+                
               </th>
 
             </tr>

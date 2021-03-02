@@ -8,14 +8,17 @@ use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sendMail;
 use Config\Information;
+use Illuminate\Support\Facades\Config;
 
 class ReservationController extends Controller
 {
     public function show(){
+        
         return view('reservation');
     }
     
     public function store(Request $request){
+
         //$informations = new Information("Sunday", 12,18,10);
         $_SESSION['message'] ='';
         if(!empty($_POST)){
@@ -37,7 +40,7 @@ class ReservationController extends Controller
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     if($today < $_POST['date'] ){
                         //$informations->dayOff
-                        if($nameDay != "Sunday" ){
+                        if($nameDay != 'Sunday' ){
                             if(12 <= $_POST['time'] && $_POST['time'] < 18){
                                 $result = Reservation::verif($_POST['time'], $_POST['date']);
                                 
