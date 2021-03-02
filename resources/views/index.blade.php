@@ -19,7 +19,7 @@ function initMap() {
 }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<?=getenv('API_KEY')?>&callback=initMap&libraries=&v=weekly" async></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?=env('API_KEY')?>&callback=initMap&libraries=&v=weekly" async></script>
 <style>
 #map {
     margin-left: 10%;
@@ -107,4 +107,6 @@ function initMap() {
 <h2>📍Adresse: 102 Boulevard de Sébastopol, 75003 Paris</h2>
 </div>
 <div id="map">
+
 </div>
+<?= env('APP_NAME');?>
