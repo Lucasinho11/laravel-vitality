@@ -15,7 +15,7 @@ class InfoController extends Controller
         $openHour = Config::get('information.openHour');
         $closeHour = Config::get('information.closeHour');
         $placeLimit = Config::get('information.placeLimit');
-        return response()->json(['infos' => ['adresse' => $adress,'Jour fermé' =>  $dayOff,"heure d'ouverture" => $openHour,"heure de fermeture" => $closeHour,"limite de place" => $placeLimit]], 422);
+        return response()->json(['infos' => ['adresse' => $adress,'fermeture' =>  $dayOff,"ouverture" => $openHour,"fermeture" => $closeHour,"place" => $placeLimit]], 422);
     }
     
 }
