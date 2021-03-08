@@ -105,6 +105,9 @@ class ApiReservationController extends Controller
                 
             }
         }
+        else{
+            return response()->json(['error' => "champs obligatoire"], 422);
+        }
        
     }
 }
