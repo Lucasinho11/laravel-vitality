@@ -52,7 +52,7 @@ class ReservationController extends Controller
                                 if(count($result) < 10){
                                     $token = md5(uniqid(true));
                                     Reservation::insert($_POST, $token);
-                                    Mail::to($_POST['email'])->send(new sendMail($token, $_POST));
+                                    Mail::to($_POST['email'])->send(new sendMail($token, $_POST['time'], $_POST['date'] ));
                                     //return back()->with('success','Item created successfully!');
                                     session()->flash('message', 'success');
 

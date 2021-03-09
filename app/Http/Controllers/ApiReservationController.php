@@ -19,8 +19,11 @@ class ApiReservationController extends Controller
         $openHour = Config::get('information.openHour');
         $closeHour = Config::get('information.closeHour');
         $placeLimit = Config::get('information.placeLimit');
-        if(!empty($_POST)){
-            if(empty($_POST['email']) || empty($_POST['date']) || empty($_POST['time'])) {
+        $email = $request->input('email');
+        $date = $request->input('date');
+        $time = $request->input('time');
+        if(!empty($email) || !empty($date) || !empty($time)){
+            if(empty($email) || empty($date) || empty($time)) {
                 
                 $_SESSION['old_inputs'] = $_POST;
                 
@@ -33,20 +36,20 @@ class ApiReservationController extends Controller
             else{
                 
                 $today = date('Y-m-d');
-                $tab = explode('-', $_POST['date']);
+                $tab = explode('-', $date);
                 $timestamp = mktime(0, 0, 0, $tab[1], $tab[2], $tab[0]);
                 $nameDay = date('l', $timestamp);
-                if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                    if($today < $_POST['date'] ){
+                if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    if($today < $date ){
 
                         if($nameDay != $dayOff ){
-                            if($openHour <= $_POST['time'] && $_POST['time'] < $closeHour){
-                                $result = Reservation::verif($_POST['time'], $_POST['date']);
+                            if($openHour <= $time && $time < $closeHour){
+                                $result = Reservation::verif($time, $date);
                                 
                                 if(count($result) < $placeLimit){
                                     $token = md5(uniqid(true));
-                                    Reservation::insert($_POST, $token);
-                                    Mail::to($_POST['email'])->send(new sendMail($token, $_POST));
+                                    Reservation::insertApi($email, $date, $time, $token);
+                                    Mail::to($email)->send(new sendMail($token, $time, $date));
                                     //return back()->with('success','Item created successfully!');
                   
 

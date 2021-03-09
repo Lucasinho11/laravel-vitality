@@ -16,4 +16,8 @@ class Reservation extends Model
         $results = DB::select('select * from reservations where  date = :date AND hour = :hour', ['date' => $date, 'hour' => $hour]);
         return $results;
     } 
+    public static function insertApi($email, $date, $time, $token){
+        DB::insert('insert into reservations (email, date, hour, token) values (?, ?, ?, ?)', [$email, $date, $time, $token]);
+
+    }
 }

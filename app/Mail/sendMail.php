@@ -18,11 +18,11 @@ class sendMail extends Mailable
      *
      * @return void
      */
-    public function __construct($token, $info)
+    public function __construct($token, $time, $date)
     {
         $this->token = $token;
-        $this->hour = $info['time'];
-        $this->date = $info['date'];
+        $this->hour = $time;
+        $this->date = $date;
     }
 
     /**
