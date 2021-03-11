@@ -9,8 +9,8 @@ class Annulation extends Model
 {
     use HasFactory;
     public static function getInfo($token){
-        $results = DB::select('select * from reservations where  token = :token', ['token' => $token]);
-        return $results;
+        $result = DB::select('select email from reservations where  token = :token', ['token' => $token]);
+        return $result;
     }
     public static function supReservation($token){
         $result =  DB::table('reservations')->where('token', '=', $token)->delete();
