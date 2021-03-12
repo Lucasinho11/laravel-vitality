@@ -54,7 +54,7 @@ class ApiReservationController extends Controller
                   
 
 
-                                    return response()->json(['message' => 'succes'], 201);
+                                    return response()->json(['success' => 'Votre réservation a bien été enregistrée!'], 201);
       
 
                                     
@@ -66,7 +66,7 @@ class ApiReservationController extends Controller
                                     //$_SESSION['old_inputs'] = $_POST;
 
                                     return response()->json(['error' => "Il n'y a plus de place disponible à cette heure ce jour ci"], 400);
-
+                                    
                                 }
 
 
