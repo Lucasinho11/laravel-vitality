@@ -28,6 +28,6 @@ class AnnulationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.AnnulationReservation');
+        return $this->view('email.annulationReservation');
     }
 }
