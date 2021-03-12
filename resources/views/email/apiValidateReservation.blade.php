@@ -13,7 +13,7 @@
     <p>Numéro de réservation: {{ $token }}</p>
     <div style="text-align: center;">
     <small>Vous souhaitez annuler ?</small>
-        <a href='http://localhost:8100/tabs/annulation'>
+        <a href='https://cryptic-eyrie-01643.herokuapp.com/api/annulation/{{$token}}'>
         <button type="button" class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-red-500 hover:bg-red-600 hover:shadow-lg">Annuler</button>
 
         </a>

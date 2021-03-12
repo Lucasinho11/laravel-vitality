@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\sendMail;
+use App\Mail\apiMail;
 use Illuminate\Http\Response;
 
 class ApiReservationController extends Controller
@@ -49,7 +49,7 @@ class ApiReservationController extends Controller
                                 if(count($result) < $placeLimit){
                                     $token = md5(uniqid(true));
                                     Reservation::insertApi($email, $date, $time, $token);
-                                    Mail::to($email)->send(new sendMail($token, $time, $date));
+                                    Mail::to($email)->send(new apiMail($token, $time, $date));
                                     //return back()->with('success','Item created successfully!');
                   
 
