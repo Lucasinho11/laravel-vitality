@@ -25,7 +25,7 @@ class ApiReservationController extends Controller
         if(!empty($email) || !empty($date) || !empty($time)){
             if(empty($email) || empty($date) || empty($time)) {
                 
-                $_SESSION['old_inputs'] = $_POST;
+                //$_SESSION['old_inputs'] = $_POST;
                 
 
                 return response()->json(['error' => 'Champs obligatoire'], 422);
@@ -63,7 +63,7 @@ class ApiReservationController extends Controller
 
                                     //Pas de places dispos
 
-                                    $_SESSION['old_inputs'] = $_POST;
+                                    //$_SESSION['old_inputs'] = $_POST;
 
                                     return response()->json(['error' => "Il n'y a plus de place disponible à cette heure ce jour ci"], 400);
 
@@ -73,7 +73,7 @@ class ApiReservationController extends Controller
                             }
                             else{
                                 //L'établissement est fermé pendant cette horaire
-                                $_SESSION['old_inputs'] = $_POST;
+                                //$_SESSION['old_inputs'] = $_POST;
 
 
                                 return response()->json(['error' => "L'établissement est fermé à cette heure"], 400);
@@ -82,7 +82,7 @@ class ApiReservationController extends Controller
                         else{
                             //dimanche fermé
                  
-                            $_SESSION['old_inputs'] = $_POST;
+                            //$_SESSION['old_inputs'] = $_POST;
 
                             return response()->json(['error' => "L'établissement est fermé le jour que vous avez choisi."], 400);
                         }
@@ -92,7 +92,7 @@ class ApiReservationController extends Controller
                     else{
                         //date déjà passée
 
-                        $_SESSION['old_inputs'] = $_POST;
+                        //$_SESSION['old_inputs'] = $_POST;
 
                         return response()->json(['error' => "Cette date est déjà passée"], 400);
                     }
@@ -100,7 +100,7 @@ class ApiReservationController extends Controller
                 }   
                 else{
                     //email non valide
-                    $_SESSION['old_inputs'] = $_POST;
+                    //$_SESSION['old_inputs'] = $_POST;
 
                     return response()->json(['error' => "Email non valide"], 422);
                 }
