@@ -12,6 +12,10 @@ class Annulation extends Model
         $result = DB::select('select email from reservations where  token = :token', ['token' => $token]);
         return $result;
     }
+    public static function verifToken($token){
+        $result = DB::select('select * from reservations where  token = :token', ['token' => $token]);
+        return $result;
+    }
     public static function supReservation($token){
         $result =  DB::table('reservations')->where('token', '=', $token)->delete();
         //$results = DB::delete('delete from reservations where  token = :token', ['token' => $token]);

@@ -11,12 +11,19 @@ class ApiAnnulationController extends Controller
 {
     public function show($token)
     {   
-        $email = Annulation::getInfo($token);
-       Annulation::supReservation($token);
-
-
-       Mail::to($email[0]->email)->send(new AnnulationMail());
-       return response()->json(['success' => 'Réservation annulée'], 201);
+        $verif = Annulation::verifToken($token);
+        if($verif){
+            $email = Annulation::getInfo($token);
+            Annulation::supReservation($token);
+     
+     
+            Mail::to($email[0]->email)->send(new AnnulationMail());
+            return response()->json(['success' => 'Réservation annulée'], 201);
+        }
+        else{
+            return response()->json(['error' => 'Token inexistant'], 400);
+        }
+       
        
     }
 
