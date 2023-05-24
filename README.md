@@ -5,9 +5,9 @@ This is a V-Hive game booking website developed in Laravel with Tailwind CSS.
 ## Installation
 
 - Install the dependencies: `composer install`
--Generate the application key: `php artisan key:generate`
--Create the database and update the `.env` file with your database credentials.
--Migrate the database: `php artisan migrate`
+- Generate the application key: `php artisan key:generate`
+- Create the database and update the `.env` file with your database credentials.
+- Migrate the database: `php artisan migrate`
 - Start the local development server: `php artisan serve`
 
 <div align="center">
